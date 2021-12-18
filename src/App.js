@@ -5,8 +5,6 @@ import About from './components/AboutComponent';
 import SignUp from './components/SignUpComponent';
 import ContactUs from './components/ContactUsComponent';
 import { Routes as Switch, Route } from 'react-router-dom';
-import Timer from './components/TimerComponent';
-import Todo from './components/TodoComponent';
 
 function App() {
   return (
@@ -16,9 +14,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/contactus" element={<ContactUs />} />
-            <Route path="/" element={<Home />} />
-            <Route path="timer" element={<Timer />} />
-            <Route path="todo" element={<Todo />} />
+            <Route path="/*" element={<Home />} />
         </Switch>
       </div>
   );

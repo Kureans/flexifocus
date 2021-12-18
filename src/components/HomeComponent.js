@@ -1,9 +1,11 @@
 import { Component } from 'react';
 import Sidebar from './SidebarComponent';
 import Timer from './TimerComponent';
-import Todo from './TodoComponent';
+import TodoList from './TodoListComponent';
+import Music from './MusicComponent';
+import ScratchPad from './ScratchPadComponent';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Routes as Switch, Route } from 'react-router-dom';
 import '../App.css';
 
 class Home extends Component {
@@ -16,7 +18,14 @@ class Home extends Component {
                         <Sidebar/>
                     </Col>
                     <Col md={10} className="bg-warning">
-                        <Timer/>
+                        <Switch>
+                            <Route index element={<Timer />} /> 
+                            <Route path="/timer" element={<Timer />} />
+                            <Route path="/todo" element={<TodoList />} />
+                            <Route path="/music" element={<Music />} />
+                            <Route path="/scratchpad" element={<ScratchPad />} />
+                            
+                        </Switch>                     
                     </Col>
                 </Row>
             </Container>
