@@ -7,71 +7,94 @@ class Timer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            workTime: 1500,
-            breakTime: 300,
+            time: 1500,
             isWork: true,
             isTicking: false
         };
 
-        this.startTimer = this.startTimer.bind(this);
-        this.pauseTimer = this.pauseTimer.bind(this);
+        this.toggleTimer = this.toggleTimer.bind(this);
         this.resetTimer = this.resetTimer.bind(this);
+        this.toggleWork = this.toggleWork.bind(this);
+        this.toggleBreak = this.toggleBreak.bind(this);
     }
 
-    toggleWorkBreak() {
-        this.setState((state) => ({
-            isWork: !state.isWork
-        }));
+    toggleWork() {
+        this.resetTimer();
+        this.setState({ 
+            isWork: true,
+            time: 1500
+        });
     }
 
-    workTimeTick() {
-        this.setState((state) => ({
-            workTime: (state.workTime - 1)
-        }));
+    toggleBreak() {
+        this.resetTimer();
+        this.setState({ 
+            isWork: false,
+            time: 300
+        });
+    }
+
+    tick() {
+        if (this.state.time > 0) {
+            this.setState((state) => ({
+                time: (state.time - 1)
+            }));
+        }
     }
 
     startTimer() {
-        if (!this.state.isTicking) {
-            this.timerID = setInterval(() => this.workTimeTick(), 1000);
-            this.setState({ isTicking: true });
-        }     
+        this.timerID = setInterval(() => this.tick(), 1000);
+        this.setState({ isTicking: true });  
     }
 
     pauseTimer() {
-        if (this.state.isTicking) {
-            clearInterval(this.timerID);
-            this.setState({ isTicking: false });
+        clearInterval(this.timerID);
+        this.setState({ isTicking: false });
+    }
+
+    toggleTimer() {
+        if (!this.state.isTicking) {
+            this.startTimer();
+        } else {
+            this.pauseTimer();
         }
     }
 
     resetTimer() {
+        let initialTime = (this.state.isWork) ? 1500 : 300;
         this.pauseTimer();
-        this.setState({ workTime: 1500 });
+        this.setState({ time: initialTime });
     }
     
     render() {
 
-        const workTimeMinutes = Math.floor((this.state.workTime / 60));
-        const workTimeSeconds = () => {
-            let seconds = this.state.workTime % 60;
+        const initialTime = (this.state.isWork) ? 1500 : 300;
+        const timeMinutes = Math.floor((this.state.time / 60));
+        const timeSeconds = () => {
+            let seconds = this.state.time % 60;
             return (seconds < 10) ? (`0${seconds}`) : seconds;
         }  
 
         const bgColor = (this.state.isWork) ? "danger" : "success";
-        const progBarPercent = 100 - ((this.state.workTime / 1500) * 100);
+        const startOrPauseText = (this.state.isTicking) ? "Pause" : "Start";
+        const progBarPercent = 100 - ((this.state.time / initialTime) * 100);
 
         return (
             <Container fluid className="h-100">
                 <Row>
                     <Col md={{span: 8, offset: 2}} className="pt-5">
                         <Card className="text-center" bg={bgColor} text="white">
-                            <Card.Header>Timer</Card.Header>
+                            <Card.Header>
+                                <ButtonGroup size="lg">
+                                    <Button variant={bgColor} active={this.state.isWork} onClick={this.toggleWork}>Work</Button>
+                                    <Button variant={bgColor} active={!this.state.isWork} onClick={this.toggleBreak}>Break</Button>
+                                </ButtonGroup>
+                            </Card.Header>
                             <Card.Body>
                                 <Card.Title>Pomodoro Cycle</Card.Title>
-                                <Card.Text className="big-font">{workTimeMinutes}:{workTimeSeconds()}</Card.Text>
+                                <Card.Text className="big-font">{timeMinutes}:{timeSeconds()}</Card.Text>
                                 <ButtonGroup size="lg">
-                                    <Button variant="outline-light" onClick={this.startTimer}>Start</Button>
-                                    <Button variant="outline-light" onClick={this.pauseTimer}>Pause</Button>
+                                    <Button variant="outline-light" onClick={this.toggleTimer}>{startOrPauseText}</Button>
                                     <Button variant="outline-light" onClick={this.resetTimer}>Reset</Button>
                                 </ButtonGroup>
                                 <div className="pt-3">
