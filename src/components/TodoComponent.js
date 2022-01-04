@@ -1,20 +1,17 @@
-import { Component } from 'react';
+import { Accordion } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-class Todo extends Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            id: props.id,
-            todo: props.todo
-        };
-    }
+function Todo(props) {
 
-    render() {
-        return (
-            <div></div>
-        );
-    }
+    return (
+        <Accordion.Item eventKey={props.todo.id}>
+            <Accordion.Header><span onClick={() => console.log(props.todo.id)}><FontAwesomeIcon icon={faTimes}/>&nbsp;</span>{props.todo.maintask}</Accordion.Header>
+            <Accordion.Body>          
+                {props.todo.description}                        
+            </Accordion.Body>
+        </Accordion.Item>
+    );
 }
 
 export default Todo;

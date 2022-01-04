@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Container, Row, Col, Card, Button, ButtonGroup, ProgressBar } from 'react-bootstrap';
-import '../App.css';
+import  '../App.css';
 
 class Timer extends Component {
 
@@ -39,6 +39,9 @@ class Timer extends Component {
             this.setState((state) => ({
                 time: (state.time - 1)
             }));
+        } else {
+            // this.playAlarm();
+            this.onFinishCycle();
         }
     }
 
@@ -64,6 +67,21 @@ class Timer extends Component {
         let initialTime = (this.state.isWork) ? 1500 : 300;
         this.pauseTimer();
         this.setState({ time: initialTime });
+    }
+
+    // playAlarm() {
+    //     let audio = new Audio('./alarm.mp3');
+    //     audio.play();
+    // }
+
+    onFinishCycle() {
+        if (this.state.isWork) {
+            alert("Finished a work cycle");
+            this.toggleBreak();
+        } else {
+            alert("Finished a break cycle");
+            this.toggleWork();
+        }
     }
     
     render() {

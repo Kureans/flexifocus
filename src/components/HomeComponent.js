@@ -6,6 +6,7 @@ import Music from './MusicComponent';
 import ScratchPad from './ScratchPadComponent';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Routes as Switch, Route } from 'react-router-dom';
+import { LIST_ITEMS as listItems } from '../shared/listItems.js';
 import '../App.css';
 
 class Home extends Component {
@@ -21,10 +22,9 @@ class Home extends Component {
                         <Switch>
                             <Route index element={<Timer />} /> 
                             <Route path="/timer" element={<Timer />} />
-                            <Route path="/todo" element={<TodoList />} />
+                            <Route path="/todo" element={<TodoList listItems={listItems} />} />
                             <Route path="/music" element={<Music />} />
-                            <Route path="/scratchpad" element={<ScratchPad />} />
-                            
+                            <Route path="/scratchpad" element={<ScratchPad />} />                            
                         </Switch>                     
                     </Col>
                 </Row>
