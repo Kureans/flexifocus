@@ -11,7 +11,39 @@ import '../App.css';
 
 class Home extends Component {
 
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         showTimer: true,
+    //         showTodoList: false,
+    //         showMusic: false,
+    //         showScratchPad: false
+    //     };
+
+    //     this.hideComponent = this.hideComponent.bind(this);
+    // }
+
+    // hideComponent(name) {
+    //     switch(name) {
+    //         case "timer":
+    //             this.setState({ showTimer: !this.state.showTimer });
+    //             break;
+    //         case "todo":
+    //             this.setState({ showTodoList: !this.state.showTodoList });
+    //             break;
+    //         case "music":
+    //             this.setState({ showMusic: !this.state.showMusic });
+    //             break;
+    //         case "pad":
+    //             this.setState({ showScratchPad: !this.state.showScratchPad });
+    //             break;
+    //         default:
+    //             null;
+    //     }
+    // }
+
     render() {
+        // const { showTimer, showTodoList, showMusic, showScratchPad } = this.state;
         return (
             <Container fluid className="vh-100">
                 <Row className="h-100">

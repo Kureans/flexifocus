@@ -10,3 +10,11 @@
   font-size: 108px;
 }
 
+.text-align-right {
+  text-align: right;
+}
+
+.remove-padding {
+  padding: 0;
+}
+

@@ -7,7 +7,7 @@ class Timer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            time: 1500,
+            time: 1,
             isWork: true,
             isTicking: false
         };
@@ -40,7 +40,6 @@ class Timer extends Component {
                 time: (state.time - 1)
             }));
         } else {
-            // this.playAlarm();
             this.onFinishCycle();
         }
     }
@@ -69,12 +68,13 @@ class Timer extends Component {
         this.setState({ time: initialTime });
     }
 
-    // playAlarm() {
-    //     let audio = new Audio('./alarm.mp3');
-    //     audio.play();
-    // }
+    playAlarm() {
+        let audio = new Audio('./alarm.wav');
+        audio.play();
+    }
 
     onFinishCycle() {
+        this.playAlarm();
         if (this.state.isWork) {
             alert("Finished a work cycle");
             this.toggleBreak();
