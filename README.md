@@ -2,6 +2,8 @@
 
 This is flexi-focus, a simple productivity app to keep you on track with your daily tasks.
 
+[Try it out here!](https://flexifocus.vercel.app/)
+
 ## Features for 1.0 include:
  - to-do list for task management 
  - pomodoro timer to manage work-rest cycles
