@@ -10,7 +10,6 @@ class Sidebar extends Component {
                 <NavLink className="nav-link" to="/timer">TIMER</NavLink>
                 <NavLink className="nav-link" to="/todo">TO-DO LIST</NavLink>
                 <NavLink className="nav-link" to="/music">MUSIC</NavLink>
-                <NavLink className="nav-link" to="/scratchpad">SCRATCHPAD</NavLink>
             </Nav>
         );
     }

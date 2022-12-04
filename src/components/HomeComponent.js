@@ -1,46 +1,51 @@
 import { Component } from 'react';
-import Sidebar from './SidebarComponent';
 import Timer from './TimerComponent';
 import TodoList from './TodoListComponent';
 import Music from './MusicComponent';
-import ScratchPad from './ScratchPadComponent';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Routes as Switch, Route } from 'react-router-dom';
-import { LIST_ITEMS as listItems } from '../shared/listItems.js';
+import { Nav } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import '../App.css';
 
 class Home extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         showTimer: true,
-    //         showTodoList: false,
-    //         showMusic: false,
-    //         showScratchPad: false
-    //     };
+    constructor(props) {
+        super(props);
+        this.state = {
+            showTimer: true,
+            showTodoList: false,
+            showMusic: false
+        };
 
-    //     this.hideComponent = this.hideComponent.bind(this);
-    // }
+        this.toggleView = this.toggleView.bind(this);
+    }
 
-    // hideComponent(name) {
-    //     switch(name) {
-    //         case "timer":
-    //             this.setState({ showTimer: !this.state.showTimer });
-    //             break;
-    //         case "todo":
-    //             this.setState({ showTodoList: !this.state.showTodoList });
-    //             break;
-    //         case "music":
-    //             this.setState({ showMusic: !this.state.showMusic });
-    //             break;
-    //         case "pad":
-    //             this.setState({ showScratchPad: !this.state.showScratchPad });
-    //             break;
-    //         default:
-    //             null;
-    //     }
-    // }
+    toggleView(num) {
+        switch (num) {
+            default:
+            case 1:
+                this.setState({
+                    showTimer: true,
+                    showTodoList: false,
+                    showMusic: false
+                });
+                break;
+            case 2:
+                this.setState({
+                    showTimer: false,
+                    showTodoList: true,
+                    showMusic: false
+                });
+                break;
+            case 3:
+                this.setState({
+                    showTimer: false,
+                    showTodoList: false,
+                    showMusic: true
+                });  
+                break;
+        }
+    }
 
     render() {
         // const { showTimer, showTodoList, showMusic, showScratchPad } = this.state;
@@ -48,16 +53,22 @@ class Home extends Component {
             <Container fluid className="vh-100">
                 <Row className="h-100">
                     <Col md={2} className="bg-light">
-                        <Sidebar/>
+                        <Nav defaultActiveKey="/timer" className="flex-column text-center pt-3">
+                            <NavLink className="nav-link" to="/timer" onClick={() => this.toggleView(1)}>TIMER</NavLink>
+                            <NavLink className="nav-link" to="/todo" onClick={() => this.toggleView(2)}>TO-DO LIST</NavLink>
+                            <NavLink className="nav-link" to="/music" onClick={() => this.toggleView(3)}>MUSIC</NavLink>
+                        </Nav>
                     </Col>
                     <Col md={10} className="bg-warning">
-                        <Switch>
+                        {/* <Switch>
                             <Route index element={<Timer />} /> 
                             <Route path="/timer" element={<Timer />} />
                             <Route path="/todo" element={<TodoList listItems={listItems} />} />
-                            <Route path="/music" element={<Music />} />
-                            <Route path="/scratchpad" element={<ScratchPad />} />                            
-                        </Switch>                     
+                            <Route path="/music" element={<Music />} />                 
+                        </Switch>                */}
+                        <Timer isActive={this.state.showTimer} />      
+                        <TodoList isActive={this.state.showTodoList} />
+                        <Music isActive={this.state.showMusic} /> 
                     </Col>
                 </Row>
             </Container>

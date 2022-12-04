@@ -9,7 +9,7 @@ class Timer extends Component {
         this.state = {
             time: 1500,
             isWork: true,
-            isTicking: false
+            isTicking: false,
         };
 
         this.toggleTimer = this.toggleTimer.bind(this);
@@ -97,7 +97,7 @@ class Timer extends Component {
         const startOrPauseText = (this.state.isTicking) ? "Pause" : "Start";
         const progBarPercent = 100 - ((this.state.time / initialTime) * 100);
 
-        return (
+        return this.props.isActive && (
             <Container fluid className="h-100">
                 <Row>
                     <Col md={{span: 8, offset: 2}} className="pt-5">

@@ -193,7 +193,7 @@ class TodoList extends Component {
 
         const textLabel = (this.state.isAccordionView) ? "Accordion" : "Cards";
 
-        return (
+        return this.props.isActive && (
             <>
                 <Container className="pt-5">
                     <Button variant="secondary" size="sm" className="mb-2" onClick={this.toggleListView}>{textLabel}</Button>
