@@ -16,8 +16,8 @@ class Header extends Component {
                     <Nav className="me-auto">
                         <NavLink className="nav-link" to="/">Home</NavLink>
                         <NavLink className="nav-link" to="/about">About</NavLink>                   
-                        <NavLink className="nav-link" to="/contactus">Contact Us</NavLink>        
-                        <NavLink className="nav-link" to="/signup">Sign Up</NavLink>      
+                        {/* <NavLink className="nav-link" to="/contactus">Contact Us</NavLink>        
+                        <NavLink className="nav-link" to="/signup">Sign Up</NavLink>       */}
                     </Nav>
                     <Button className="text-light">
                     <FontAwesomeIcon icon={faSignInAlt} size="lg"/> Login
