@@ -14,7 +14,7 @@ class Home extends Component {
         this.state = {
             showTimer: true,
             showTodoList: false,
-            showMusic: false
+            showMusic: "none"
         };
 
         this.toggleView = this.toggleView.bind(this);
@@ -27,21 +27,21 @@ class Home extends Component {
                 this.setState({
                     showTimer: true,
                     showTodoList: false,
-                    showMusic: false
+                    showMusic: "none"
                 });
                 break;
             case 2:
                 this.setState({
                     showTimer: false,
                     showTodoList: true,
-                    showMusic: false
+                    showMusic: "none"
                 });
                 break;
             case 3:
                 this.setState({
                     showTimer: false,
                     showTodoList: false,
-                    showMusic: true
+                    showMusic: "block"
                 });  
                 break;
         }
@@ -68,7 +68,17 @@ class Home extends Component {
                         </Switch>                */}
                         <Timer isActive={this.state.showTimer} />      
                         <TodoList isActive={this.state.showTodoList} />
-                        <Music isActive={this.state.showMusic} /> 
+                        <iframe
+                            title="lofi-beats"
+                            style={{ borderRadius: 12, marginTop: 24, display:`${this.state.showMusic}`}}
+                            src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn?utm_source=generator"
+                            width="100%"
+                            height="80%"
+                            frameBorder={0}
+                            allowFullScreen=""
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy"
+                        />
                     </Col>
                 </Row>
             </Container>
