@@ -1,1 +1,8 @@
 /node_modules
+
+# Database File
+flexifocus-db
+
+# Since sqlite3 is baked into npm package, can't exactly use cli tools to interact w/ db.
+# Use a separate db_script.js file to interact w/ DB outside of main application logic, via node-sqlite3 API.
+db_script.js
