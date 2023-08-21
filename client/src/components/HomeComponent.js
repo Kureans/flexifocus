@@ -60,12 +60,6 @@ class Home extends Component {
                         </Nav>
                     </Col>
                     <Col md={10} className="bg-warning">
-                        {/* <Switch>
-                            <Route index element={<Timer />} /> 
-                            <Route path="/timer" element={<Timer />} />
-                            <Route path="/todo" element={<TodoList listItems={listItems} />} />
-                            <Route path="/music" element={<Music />} />                 
-                        </Switch>                */}
                         <Timer isActive={this.state.showTimer} />      
                         <TodoList isActive={this.state.showTodoList} />
                         <iframe
@@ -79,6 +73,7 @@ class Home extends Component {
                             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                             loading="lazy"
                         />
+                        
                     </Col>
                 </Row>
             </Container>
