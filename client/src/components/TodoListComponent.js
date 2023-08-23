@@ -1,4 +1,5 @@
 import { Component } from "react";
+import axios from "axios";
 import { Accordion, Container, Button, Modal, Form, Row, Col, CloseButton, Card, Offcanvas } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
@@ -25,6 +26,8 @@ class TodoList extends Component {
         this.addTodo = this.addTodo.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+        this.handleLoad = this.handleLoad.bind(this);
         this.markAsComplete = this.markAsComplete.bind(this);
     }
 
@@ -36,6 +39,32 @@ class TodoList extends Component {
         this.setState({
         [name]: value
         });
+    }
+
+    handleSave() {
+        // to-do: replace hard-coded value w/ actual user id
+        const user_id = 0;
+        const payload = {
+            user_id: user_id,
+            tasks: this.state.todos
+        };
+        axios.post("http://localhost:3001/save", payload)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
+
+    handleLoad() {
+        axios.get("http://localhost:3001/load")
+        .then((res) => {
+            const tasks = res.data;
+            this.setState({
+                todos: tasks,
+                mainTask: '',
+                description: '',
+                todoCount: tasks.length
+            });
+        })
+        .catch(err => console.log(err));
     }
 
     addTodo(event) {
@@ -199,7 +228,9 @@ class TodoList extends Component {
                     <Button variant="secondary" size="sm" className="mb-2" onClick={this.toggleListView}>{textLabel}</Button>
                     <Button variant="success" size="sm" className="mb-2 ms-1" onClick={this.toggleOffcanvas}>COMPLETED</Button>
                     {toDoListWrapped}
-                    <Button variant="danger" className="p-1 mt-1" onClick={this.toggleModal}><FontAwesomeIcon icon={faPlus} />&nbsp;ADD</Button>
+                    <Button variant="danger" className="p-2 mx-2 mt-1" onClick={this.toggleModal}><FontAwesomeIcon icon={faPlus} />&nbsp;ADD</Button>
+                    <Button variant="danger" className="py-2 px-3 mx-2 mt-1" onClick={this.handleSave}>SAVE</Button>
+                    <Button variant="danger" className="py-2 px-3 mx-2 mt-1" onClick={this.handleLoad}>LOAD</Button>
                 </Container>
 
                 <Modal show={this.state.isTodoModalOpen} onHide={this.toggleModal} >

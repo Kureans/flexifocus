@@ -23,10 +23,25 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+app.get('/load', (req, res) => {
+    db.all("SELECT * FROM tasks WHERE user_id = 0;", (err, rows) => {
+        const tasks = rows.map((row) => {
+            const task = {
+                id: row.task_id,
+                maintask: row.maintask,
+                description: row.subtask
+            };
+            return task;
+        });
+
+        console.log(tasks);
+        res.send(tasks);
+    });
+});
+
 app.post('/save', (req, res) => {
     const tasks = req.body.tasks;
-    var saveInsertString = "INSERT INTO tasks (user_id, task_id, maintask, subtask) VALUES\n";
-    console.log(`tasks length: ${tasks.length}`);
+    let saveInsertString = "INSERT INTO tasks (user_id, task_id, maintask, subtask) VALUES\n";
     tasks.forEach((task, idx) => {
         if (idx < tasks.length-1) {
             saveInsertString += `(0, ${task.id}, "${task.maintask}", "${task.description}"),\n`;
@@ -35,11 +50,10 @@ app.post('/save', (req, res) => {
             saveInsertString += `(0, ${task.id}, "${task.maintask}", "${task.description}");`;
         }
     });
-    console.log(saveInsertString);
     db.run(saveInsertString);
     res.send("ok");
 })
   
 app.listen(port, () => {
-console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`)
 });
