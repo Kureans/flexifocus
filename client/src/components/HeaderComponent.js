@@ -8,7 +8,7 @@ class Header extends Component {
 
     render() {
         return (    
-        <Navbar bg="primary" variant="dark" expand="lg">
+        <Navbar className="dark-blue" variant="dark" expand="lg">
             <Container>
                 <Navbar.Brand href="/">flexi-focus</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbar" />

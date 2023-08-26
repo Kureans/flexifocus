@@ -2,7 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 const About = () => {
     return (
-        <Container fluid className="vh-100 bg-warning pt-2">
+        <Container fluid className="vh-100 light-blue pt-2">
             <Row>
                 <Col sm={{span: 10, offset: 1}}>
                 <p className="text-justify">

@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import Timer from './TimerComponent';
 import TodoList from './TodoListComponent';
-import Music from './MusicComponent';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
@@ -52,14 +51,14 @@ class Home extends Component {
         return (
             <Container fluid className="vh-100">
                 <Row className="h-100">
-                    <Col md={2} className="bg-light">
+                    <Col md={2} className="sky-blue">
                         <Nav defaultActiveKey="/timer" className="flex-column text-center pt-3">
                             <NavLink className="nav-link" to="/timer" onClick={() => this.toggleView(1)}>TIMER</NavLink>
                             <NavLink className="nav-link" to="/todo" onClick={() => this.toggleView(2)}>TO-DO LIST</NavLink>
                             <NavLink className="nav-link" to="/music" onClick={() => this.toggleView(3)}>MUSIC</NavLink>
                         </Nav>
                     </Col>
-                    <Col md={10} className="bg-warning">
+                    <Col md={10} className="light-blue">
                         <Timer isActive={this.state.showTimer} />      
                         <TodoList isActive={this.state.showTodoList} />
                         <iframe
